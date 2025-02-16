@@ -1,0 +1,110 @@
+﻿<Window x:Class="TextProcessor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TextProcessor"
+        mc:Ignorable="d"
+        Title="Text processor" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#2E3440" Icon="/icon.png">
+    <Window.Resources>
+        <SolidColorBrush x:Key="NordicBackground" Color="#2E3440"/>
+        <SolidColorBrush x:Key="NordicForeground" Color="#D8DEE9"/>
+        <SolidColorBrush x:Key="NordicAccent" Color="#88C0D0"/>
+        <SolidColorBrush x:Key="NordicBorder" Color="#5E81AC"/>
+        <SolidColorBrush x:Key="NordicPanelBackground" Color="#3B4252"/>
+        <SolidColorBrush x:Key="NordicTextBoxBackground" Color="#434C5E"/>
+        <SolidColorBrush x:Key="NordicButtonBackground" Color="#5E81AC"/>
+
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5,2"/>
+            <Setter Property="Background" Value="{StaticResource NordicButtonBackground}"/>
+            <Setter Property="Foreground" Value="{StaticResource NordicForeground}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource NordicBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{StaticResource NordicForeground}"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="3"/>
+            <Setter Property="Background" Value="{StaticResource NordicTextBoxBackground}"/>
+            <Setter Property="Foreground" Value="{StaticResource NordicForeground}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource NordicBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="{StaticResource NordicBackground}" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="{StaticResource NordicPanelBackground}" Padding="10" CornerRadius="5"
+        BorderBrush="{StaticResource NordicBorder}" BorderThickness="1">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="Word to delete:" VerticalAlignment="Center"/>
+                <TextBox x:Name="tbDeleteWord" Grid.Row="0" Grid.Column="1" Width="150"/>
+                <Button Content="Delete word" Grid.Row="0" Grid.Column="2" Click="DeleteWord_Click"/>
+
+                <Label Grid.Row="1" Grid.Column="0" Content="Word to reverse:" VerticalAlignment="Center"/>
+                <TextBox x:Name="tbReverseWord" Grid.Row="1" Grid.Column="1" Width="150"/>
+                <Button Content="Reverse word" Grid.Row="1" Grid.Column="2" Click="ReverseWord_Click"/>
+
+                <Label Grid.Row="2" Grid.Column="0" Content="Find repeats of word:" VerticalAlignment="Center"/>
+                <TextBox x:Name="tbFindWord" Grid.Row="2" Grid.Column="1" Width="150"/>
+                <Button Content="Find count" Grid.Row="2" Grid.Column="2" Click="FindWordCount_Click"/>
+                <Label x:Name="lblCount" Grid.Row="2" Grid.Column="3" Content="0"
+               Foreground="#A3BE8C" VerticalAlignment="Center" FontWeight="Bold"/>
+
+                <Label Grid.Row="3" Grid.Column="0" Content="Clean spaces:" VerticalAlignment="Center"/>
+                <Button Content="Clean" Grid.Row="3" Grid.Column="1" Click="CleanSpaces_Click"/>
+
+                <Button x:Name="btnCodeDecode" Grid.Row="4" Grid.ColumnSpan="4" Content="Code"
+                Click="CodeDecode_Click" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+            </Grid>
+        </Border>
+
+        <RichTextBox x:Name="rtbText" Grid.Row="1" Margin="5"
+             VerticalScrollBarVisibility="Auto"
+             Foreground="{StaticResource NordicForeground}"
+             Background="{StaticResource NordicPanelBackground}"
+             BorderBrush="{StaticResource NordicBorder}"
+             BorderThickness="1"
+             TextChanged="rtbText_TextChanged">
+            <FlowDocument>
+                <Paragraph>
+                    
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <Label x:Name="lblWordCount" Grid.Row="2" Content="Words total: 0"
+       HorizontalAlignment="Right" Margin="5" Foreground="{StaticResource NordicForeground}"/>
+    </Grid>
+</Window>
